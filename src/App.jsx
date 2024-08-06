@@ -13,6 +13,12 @@ const addTodo = (todo) => {
 
 const updateTodo = (id,todo)=>{
   setTodos((prev)=>prev.map((prevTodo)=>prevTodo.id === id ? todo : prevTodo));
+
+  // setTodos((prev)=>{
+  //   return prev.map((prevTodo)=>{
+  //     return prevTodo.id === id ? todo : prevTodo
+  //   })
+  // })
 }
 
 const deleteTodo =(id)=>{
@@ -22,19 +28,24 @@ const deleteTodo =(id)=>{
 
 const toggleComplete = (id)=>{
   setTodos((prev)=> prev.map((prevTodo)=> prevTodo.id === id ? {...prevTodo,completed: !prevTodo.completed}:prevTodo))
+  // setTodos((prev)=>{
+  //   return prev.map((prevTodo)=>{
+  //     return prevTodo.id === id ? {...prevTodo,completed:!prevTodo.completed}:prevTodo
+  //   })
+  // })
 }
 
-// useEffect(()=>{
-//   const todos= JSON.parse(localStorage.getItem('todos'));
-//   if(todos && todos.length){
-//     setTodos(todos);
-//   }
+useEffect(()=>{
+  const todos= JSON.parse(localStorage.getItem('todos'));
+  if(todos && todos.length){
+    setTodos(todos);
+  }
 
-// },[])
+},[])
 
-// useEffect(()=>{
-//   localStorage.setItem('todos',JSON.stringify(todos));
-// },[todos])
+useEffect(()=>{
+  localStorage.setItem('todos',JSON.stringify(todos));
+},[todos])
   return (
     <TodoProvider value={{todos,addTodo,updateTodo,deleteTodo,toggleComplete}}>
     <div className="bg-[#172842] min-h-screen py-8">
