@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useTodo } from "../context";
 
 const TodoForm = () => {
     const [todo,setTodo] = useState('');
+    const handleChange=(e)=>{
+      setTodo(e.target.value);
+    }
+   
     const {addTodo} =useTodo();
     const add= (e)=>{
         e.preventDefault();
@@ -18,7 +22,7 @@ const TodoForm = () => {
         placeholder="Write Todo..."
         className="w-full border border-black/10 rounded-l-lg px-3 outline-none duration-150 bg-white/20 py-1.5"
         value={todo}
-        onChange={(e)=>setTodo(e.target.value)}
+        onChange={handleChange}
       />
       <button
         type="submit"
